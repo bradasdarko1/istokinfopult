@@ -1,16 +1,37 @@
-import TOCInline from 'pliny/ui/TOCInline'
-import Pre from 'pliny/ui/Pre'
-import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
 import type { MDXComponents } from 'mdx/types'
 import Image from './Image'
 import CustomLink from './Link'
-import TableWrapper from './TableWrapper'
 
-export const components: MDXComponents = {
+function Pre(props: React.HTMLAttributes<HTMLPreElement>) {
+  return (
+    <pre
+      {...props}
+      className={`overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-white ${
+        props.className || ''
+      }`}
+    />
+  )
+}
+
+function TOCInline() {
+  return null
+}
+
+function BlogNewsletterForm() {
+  return null
+}
+
+const components: MDXComponents = {
   Image,
-  TOCInline,
   a: CustomLink,
   pre: Pre,
-  table: TableWrapper,
+  TOCInline,
   BlogNewsletterForm,
+}
+
+export function useMDXComponents(componentsOverride: MDXComponents): MDXComponents {
+  return {
+    ...components,
+    ...componentsOverride,
+  }
 }
